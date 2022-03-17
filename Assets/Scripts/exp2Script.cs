@@ -13,10 +13,17 @@ public class exp2Script : MonoBehaviour
     AudioSource MachineSFX;
     [SerializeField]
     AudioSource WindowSFX;
+    [SerializeField]
+    AudioSource spotlightSFX;
+
+    [Header("Lights Animator")]
+    [SerializeField]
+    Animator[] lights;
 
     private void Start()
     {
         StartCoroutine(expStart());
+        //gameEvents.current.onWindowTrigger += closeWindows;
     }
 
     public void closeWindows()
@@ -35,15 +42,24 @@ public class exp2Script : MonoBehaviour
 
         LeanTween.moveLocalZ(WindowedWall, 0.5f, 0.1f);
         LeanTween.moveLocalY(WindowedWall, 0, 2.5f);
-        LeanTween.moveLocalY(SpotLightsSet, 2f, 4f);
+        LeanTween.moveLocalY(SpotLightsSet, 2.6f, 4f);
         yield return new WaitForSeconds(2);
 
         LeanTween.moveLocalZ(WindowedWall, 0, 3f);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
+
+        spotlightSFX.Play();
+        for (int i = 0; i < lights.Length; i++)
+            lights[i].Play("heavyLightOn");
     }
 
     IEnumerator closeWindowsIE()
     {
         yield return new WaitForSeconds(1);
+    }
+
+    private void OnDestroy()
+    {
+        //gameEvents.current.onWindowTrigger -= closeWindows;
     }
 }

@@ -12,10 +12,16 @@ public class gameEvents : MonoBehaviour
         current = this;
     }
 
-    public event Action onLightsTrigger;
+    public event Action onLightsTrigger, onWindowTrigger;
     public void lightSwitchFlipped()
     {
         if (onLightsTrigger != null)
             onLightsTrigger();
+    }
+
+    public void windowTriggerEvent()
+    {
+        if (onWindowTrigger != null)
+            onWindowTrigger();
     }
 }

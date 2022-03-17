@@ -6,6 +6,8 @@ public class lightSwitchScript : MonoBehaviour
 {
     [SerializeField]
     GameObject[] linkedLights;
+    [SerializeField]
+    AudioSource switchSFX;
 
     public bool lightState = true;
 
@@ -33,6 +35,7 @@ public class lightSwitchScript : MonoBehaviour
     public void flipSwitch()
     {
         gameEvents.current.lightSwitchFlipped();
+        switchSFX.Play();
         lightState = !lightState;
         for (int i = 0; i < linkedLights.Length; i++)
             linkedLights[i].SetActive(lightState);
