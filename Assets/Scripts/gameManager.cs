@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class gameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    GameObject[] experiments;
 
-    // Update is called once per frame
-    void Update()
+    public void expActivate(int index)
     {
-        
+        for (int i = 0; i < experiments.Length; i++)
+            experiments[i].SetActive(false);
+        experiments[index].SetActive(true);
     }
 }
